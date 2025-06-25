@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class seleniumpracticeincorrectinfo {
+public class Incorrectinfo {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -29,10 +29,10 @@ public class seleniumpracticeincorrectinfo {
 		//driver.findElement(By.cssSelector("button.signInBtn")).click();  //tagname.classname
 		driver.findElement(By.cssSelector("button.submit")).click(); //tagname.classname
 		
-	    //5.Put an time out
+	  //5.Put an time out
 		//Wait for up to 10 seconds until the email field is visible
-        //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("email")));
+    //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    //wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("email")));
 		//Explicit Wait: WebDriverWait waits up to 10 seconds for the element with ID email to become visible.
 		//This is targeted and best for handling dynamic elements.
 		//Implicit Wait: Tells Selenium to wait up to 5 seconds for any element to appear before throwing
