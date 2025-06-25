@@ -1,0 +1,30 @@
+package irapractice;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Singsiblingsparenttraverse {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		WebDriver driver = new ChromeDriver();
+		//Sibing - Child to parent traverse
+		
+		//*this is parent to child
+		///header/div/button[1]/following-sibling::button[1]
+		driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+		driver.findElement(By.xpath("//header/div/button[1]/following-sibling::button[1]")).click();
+		System.out.println(driver.findElement(By.xpath("//header/div/button[1]/following-sibling::button[1]")).getText());
+		
+		//*this is child to parent
+		//header/div/button[1]/parent::div
+		////header/div/button[1]/parent::div//parent::header//a = parent to head parent
+		driver.findElement(By.xpath("//header/div/button[1]/parent::div")).click();
+		System.out.println(driver.findElement(By.xpath("//header/div/button[1]/parent::div")).getText());
+		
+
+	}
+
+}
