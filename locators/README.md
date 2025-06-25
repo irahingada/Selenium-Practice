@@ -2,9 +2,6 @@
 
 This folder contains Java Selenium test scripts focused on identifying web elements using various locator strategies.
 
-## Link
-https://rahulshettyacademy.com/locatorspractice/
-
 ## 🔍 What’s Covered
 
 - `id`
