@@ -11,12 +11,11 @@ public class Incorrectinfo {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//1. invoke the driver
-				WebDriver driver = new ChromeDriver();
+		WebDriver driver = new ChromeDriver();
 				
 		//2. get the link
 		driver.get("https://rahulshettyacademy.com/locatorspractice/");
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-		//
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));		
 		
 		//3. Log-in with incorrect details
 		driver.findElement(By.id("inputUsername")).sendKeys(" ");
@@ -38,8 +37,7 @@ public class Incorrectinfo {
 		//Implicit Wait: Tells Selenium to wait up to 5 seconds for any element to appear before throwing
 		
 		//5. get the error message "incorrect username or password" 
-		System.out.println(driver.findElement(By.cssSelector("p.error")).getText());
-				
+		System.out.println(driver.findElement(By.cssSelector("p.error")).getText());				
 				
 	}
 
