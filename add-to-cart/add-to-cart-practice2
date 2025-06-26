@@ -1,0 +1,49 @@
+package irapractice;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
+public class Addingitemstocart2 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		WebDriver driver = new ChromeDriver();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		driver.manage().window().maximize();
+		driver.get("https://rahulshettyacademy.com/loginpagePractise/");
+		
+		//input the username, password
+		driver.findElement(By.id("username")).sendKeys("rahulshettyacademy");
+		driver.findElement(By.id("password")).sendKeys("learning");
+		
+		//tick the "User" option
+		driver.findElement(By.xpath("(//span[@class='checkmark'])[2]")).click();
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("modal-body")));
+		String message = driver.findElement(By.xpath("//div[@class='modal-body']/p")).getText();
+		System.out.println(message);		
+		driver.findElement(By.id("okayBtn")).click();
+		
+		//select "Consultant" in the drop down list
+		driver.findElement(By.cssSelector("select.form-control")).click();
+		WebElement staticDropdpown = driver.findElement(By.cssSelector("select.form-control"));
+		Select dropdown = new Select(staticDropdpown);
+		dropdown.selectByVisibleText("Consultant");
+		
+		//click the terms and sign-in
+		driver.findElement(By.id("terms")).click();
+		driver.findElement(By.id("signInBtn")).click();
+		
+		//click "Ok" in alert
+		driver.switchTo().alert().accept();
+	}
+
+}
