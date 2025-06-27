@@ -1,0 +1,69 @@
+package irapractice;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+
+public class bookaflight {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
+
+		driver.findElement(By.id("ctl00_mainContent_rbtnl_Trip_1")).click();
+
+		// From Departure
+		Thread.sleep(2000);
+		driver.findElement(By.id("ctl00_mainContent_ddl_originStation1_CTXTaction")).click();
+		driver.findElement(By.xpath("//a[@value='CCU']")).click();
+		System.out.println("Departure: " + driver.findElement(By.xpath("//a[@value='CCU']")).getText());
+
+		// Arrival Airport
+		Thread.sleep(2000);
+		driver.findElement(By.id("ctl00_mainContent_ddl_destinationStation1_CTXTaction")).click();
+		driver.findElement(By.xpath("(//a[@value='BKK'])[2]")).click();
+		String selectedArrival = driver.findElement(By.id("ctl00_mainContent_ddl_destinationStation1_CTXT"))
+				.getAttribute("value");
+		System.out.println("Arrival: " + selectedArrival);
+
+		// Depart Date
+		Thread.sleep(2000);
+		// driver.findElement(By.className("ui-datepicker-trigger")).click();
+		driver.findElement(By.cssSelector("a.ui-state-default.ui-state-active")).click();
+		WebElement fromDate = driver.findElement(By.id("ctl00_mainContent_view_date1")); // replace with actual ID or
+																							// locator
+		String dateValue = fromDate.getAttribute("value");
+		System.out.println("Selected From Date: " + dateValue);
+
+//		//Return Date
+//		Thread.sleep(2000);
+//		driver.findElement(By.xpath("(//button[@class='ui-datepicker-trigger'])[2]")).click();
+//		WebElement returnDate = driver.findElement(By.cssSelector("a.ui-state-default ui-state-active"));
+//		String returndateValue = returnDate.getAttribute("value");
+//		System.out.println("Selected Return Date: " + returndateValue);
+
+		// No. of Passenger
+		Thread.sleep(2000);
+		driver.findElement(By.id("divpaxinfo")).click();
+
+		Thread.sleep(5000);
+		for (int i = 0; i < 4; i++) {
+			driver.findElement(By.xpath("//span[@id='hrefIncAdt']")).click();
+		}
+		Thread.sleep(2000);
+		driver.findElement(By.id("btnclosepaxoption")).click();
+		// Assert.assertEquals(driver.findElement(By.id("divpaxinfo")).getText(), "9
+		// Adult");
+		System.out.println(driver.findElement(By.id("divpaxinfo")).getText());
+
+		// Click Family and Friends
+		driver.findElement(By.id("ctl00_mainContent_chk_friendsandfamily")).click();
+
+	}
+}
