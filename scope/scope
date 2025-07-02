@@ -1,0 +1,55 @@
+package irapractice;
+
+import java.time.Duration;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Scope {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		WebDriver driver = new ChromeDriver();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver.manage().window().maximize();
+		
+		driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+		
+		//1. give me the count of links of entire page
+		System.out.println(driver.findElements(By.tagName("a")).size());
+		
+		//2. give me the count of links of entire frame	(limiting WebDriver scope)
+		WebElement footerdriver = driver.findElement(By.id("gf-BIG")); 
+		System.out.println(footerdriver.findElements(By.tagName("a")).size());
+		
+		//3. give me count of links only for the first column
+		WebElement columndriver = footerdriver.findElement(By.xpath("//table//tbody//tr//td[1]//ul"));
+		List<WebElement> links = columndriver.findElements(By.tagName("a")); // ✅ store once
+		System.out.println("Links in first column: " + links.size());
+		// //div[@id='gf-BIG']/table/tbody/tr/td[1]/ul if the parent was included
+		
+		//4. click on each link in the column and check if the windows are opening
+		for (int i = 0; i < links.size(); i++) 
+		{
+			String clickOnLinkTab = Keys.chord(Keys.COMMAND, Keys.ENTER);
+			links.get(i).sendKeys(clickOnLinkTab);
+			Thread.sleep(1500); // Give browser time
+		}
+		
+		//5. get the title for each window
+		Set<String> title = driver.getWindowHandles();
+		Iterator<String> webTitle = title.iterator();		
+			while(webTitle.hasNext())
+			{
+				driver.switchTo().window(webTitle.next());
+				System.out.println(driver.getTitle());
+				
+			}
+		}	
+	}
