@@ -1,0 +1,27 @@
+package irapractice;
+
+import java.time.Duration;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class maximizingWindowsAndDeletingCookies {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver.manage().deleteAllCookies();
+		
+		//deleting only certain cookie
+		//driver.manage().deleteCookieNamed(null);
+		
+		//adding the cookie
+		//driver.manage().addCookie(null); //commonly not used in real work
+		
+		driver.get("http://google.com");
+		
+	}
+
+}
