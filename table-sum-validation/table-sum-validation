@@ -1,0 +1,48 @@
+package irapractice;
+
+import java.time.Duration;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+
+public class ScrollingUsingJavascriptExecutor {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		WebDriver driver = new ChromeDriver();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver.manage().window().maximize();
+		
+		driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+		
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("window.scrollBy(0,500)");
+		Thread.sleep(3000);
+		js.executeScript("document.querySelector('.tableFixHead').scrollTop=5000");
+		//document.querySelector(".tableFixHead").scrollTop=5000 -> if in the console ""
+		
+		// //td[4] -> xpath (4 because the locator is on the 4th column)
+		// td:nth-child(4) -> cssSelector (4 because the locator is on the 4th column)
+		// .tableFixHead td:nth-child(3) - unique locator if has many table
+		// //div[@class='tableFixHead']//td[4] - unique locator if has many table
+		
+		List<WebElement> values = driver.findElements(By.xpath("//div[@class='tableFixHead']//td[4]"));
+		
+		int sum = 0;
+		
+		for(int i=0;i<values.size();i++)
+		{
+			sum = sum + Integer.parseInt(values.get(i).getText());
+			
+		}
+		System.out.println("Total: " + sum);
+		int total = Integer.parseInt(driver.findElement(By.cssSelector(".totalAmount")).getText().split(":")[1].trim());
+		Assert.assertEquals(sum, total);
+	}
+
+}
