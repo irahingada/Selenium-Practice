@@ -1,0 +1,40 @@
+package irapractice;
+
+import org.openqa.selenium.Proxy;
+import java.time.Duration;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+public class handlingHTTPSCerttificationInAutomatedBrowser {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		ChromeOptions options = new ChromeOptions();
+        // Accept insecure certificates
+		options.setAcceptInsecureCerts(true);
+		
+		// Example of using HashMap to set Chrome preferences (not required for SSL handling)
+        Map<String, Object> prefs = new HashMap<String, Object>();
+        prefs.put("download.default_directory", "/your/custom/path"); // Change to valid local path
+        prefs.put("profile.default_content_settings.popups", 0); // Block pop-ups
+        prefs.put("credentials_enable_service", false); // Disable credential prompt
+        prefs.put("profile.password_manager_enabled", false); // Disable password manager
+        options.setExperimentalOption("prefs", prefs);
+		
+		// Optional: Set proxy if needed
+		Proxy proxy = new Proxy();
+        proxy.setHttpProxy("myproxy:8080"); // Replace with a valid proxy or remove if not needed
+        options.setCapability("proxy", proxy);
+        
+        
+		WebDriver driver = new ChromeDriver(options);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver.manage().window().maximize();
+		
+		driver.get("https://expired.badssl.com/");
+		System.out.println(driver.getTitle());
+	}
+}
